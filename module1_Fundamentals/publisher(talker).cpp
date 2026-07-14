@@ -1,5 +1,5 @@
 //# This publisher, publish the percentage of battety level at every one minute 
-#incldue<chrono>
+#include<chrono>
 #include<memory>
 #include<string>
 
@@ -12,7 +12,7 @@ class Battery_level:public rclcpp::Node
 {
 public:
   Battery_level():Node("Battery_level"),count(0){
-    publisher_=this->create_publisher<std_msgs::msg::Float64>("Battreylevel",10);
+    publisher_=this->create_publisher<std_msgs::msg::Float64>("battreylevel",10);
     auto timer_callback=
          [this]()->void{
            auto number = std_msgs::msg::Float64();
@@ -24,7 +24,7 @@ public:
   }
 private:
 rclcpp::TimerBase::SharedPtr timer_;
-rclcpp::Publisher<std_msgs::msg::Float64>::sharedPtr publisher_;
+rclcpp::Publisher<std_msgs::msg::Float64>::SharedPtr publisher_;
 size_t count;
 };
 int main(int argc,char*argv[])
