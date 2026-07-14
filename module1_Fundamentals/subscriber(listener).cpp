@@ -20,7 +20,7 @@ public:
            RCLCPP_ERROR(this->get_logger(),"CRITICAL please charge");
           }
          else{
-           RCLCPP_ERROR(this->get_logger(),"battery is dying");
+           RCLCPP_FATAL(this->get_logger(),"battery is dying");
          }
        };
      subscription_=
