@@ -32,7 +32,7 @@ int main(int argc,char **argv)
   if(rclcpp::spin_until_future_complete(node,result)==
      rclcpp::FutureReturnCode::SUCCESS)
   {
-    RCLCPP_INFO(rclcpp::get_logger("rclcpp"),"Sum: %0.2f",result.get()->sum);
+    RCLCPP_INFO(rclcpp::get_logger("rclcpp"),"Sum: %0.2f",result.get()->x);
   }else{
     RCLCPP_ERROR(rclcpp::get_logger("rclcpp"),"Failed to call service drain_rate");
   }
