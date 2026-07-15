@@ -1,7 +1,7 @@
 #include<memory>
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/float64.hpp"
-#include "my_robot_nodes/srv/battery_efficiency.hpp"
+#include "my_robot_nodes/srv/batteryefficiency.hpp"
 
 class Server :public rclcpp::Node {
  public:
@@ -38,7 +38,7 @@ int main(int argc,char **argv){
  RCLCPP_INFO(rclcpp::get_logger("rclcpp"),"Ready to add two ints ");
 
  rclcpp::spin(node);
- rclcpp::shitdown();
+ rclcpp::shutdown();
  
  
 }
