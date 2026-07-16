@@ -15,8 +15,8 @@ Nasser
 
 | Module   | Topic                       | Status |
 |--------  |-------                      |--------|
-| 1        | ROS2 Fundamentals           | completed  |
-| 2        |Simulated Robot Bring-up     | inprogress |
+| 1        | ROS2 Fundamentals           | inprogress  |
+| 2        |Simulated Robot Bring-up     | Not Started |
 | 3        | Sensor Processing           | Not Started |
 | 4        | Navigation Basics           | Not Started |
 | 5        | Safety & Recovery           | Not Started |
