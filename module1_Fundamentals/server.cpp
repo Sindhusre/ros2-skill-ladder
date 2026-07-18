@@ -10,12 +10,13 @@ class Server :public rclcpp::Node {
        [this](std_msgs::msg::Float64::UniquePtr msg)->void{
          drained +=(100-msg->data) ;
          timer +=1.0;};
-     subscription_=this->create_subscription<std_msgs::msg::Float64>("battery_level",10,topic_callback);
-  }
-  service_=this->create_service<my_robot_nodes::srv:BatteryEfficiency>(
+    subscription_=this->create_subscription<std_msgs::msg::Float64>("battery_level",10,topic_callback);
+    service_=this->create_service<my_robot_nodes::srv::BatteryEfficiency>(
     "battery_efficiency",
      std::bind(
-       &Server::efficiency,this,std::placeholder::_1,std::placeholder::_2))
+       &Server::efficiency,this,std::placeholders::_1,std::placeholders::_2);)
+  }
+ 
      
   
  void efficiency(const std::shared_ptr<my_robot_nodes::srv::BatteryEfficiency::Request>request,
@@ -40,7 +41,7 @@ private:
 int main(int argc,char **argv){
  rclcpp::init(argc,argv);
  rclcpp::spin(
-   std::make_shared<Server())
+   std::make_shared<Server>());
  
  rclcpp::shutdown();
  return 0;
