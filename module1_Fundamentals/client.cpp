@@ -10,13 +10,13 @@ int main(int argc,char **argv)
 {
  rclcpp::init(argc,argv);
 
-  if(argc=1){
+  if(argc==1){
     RCLCPP_INFO(rclcpp::get_logger("rclcpp"),"we need drain rate ");
     return 1;
   }
   std::shared_ptr<rclcpp::Node>node =rclcpp::Node::make_shared("battery_efficiency_client");
-  rclcpp::Client<my_robot_nodes::srv::batteryefficiency>::SharedPtr client=
-  node->create_client<my_robot_node::srv::batteryefficiency>("battery_efficiency");
+  rclcpp::Client<my_robot_nodes::srv::BatteryEfficiency>::SharedPtr client=
+  node->create_client<my_robot_node::srv::BatteryEfficiency>("battery_efficiency");
 
   auto request=std::make_shared<my_robot_nodes::srv::BatteryEfficiency::Request>();
 
@@ -32,7 +32,7 @@ int main(int argc,char **argv)
   if(rclcpp::spin_until_future_complete(node,result)==
      rclcpp::FutureReturnCode::SUCCESS)
   {
-    RCLCPP_INFO(rclcpp::get_logger("rclcpp"),"Sum: %.2f",result.get()->x);
+    RCLCPP_INFO(rclcpp::get_logger("rclcpp"),"drain: %.2f",result.get()->x);
   }else{
     RCLCPP_ERROR(rclcpp::get_logger("rclcpp"),"Failed to call service drain_rate");
   }
