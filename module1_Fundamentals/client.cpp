@@ -1,5 +1,5 @@
 #include "rclcpp/rclcpp.hpp"
-#include "my_robot_nodes/srv/batteryefficiency.hpp"
+#include "my_robot_nodes/srv/battery_efficiency.hpp"
 
 #include <chrono>
 #include<cstdlib>
@@ -10,11 +10,7 @@ int main(int argc,char **argv)
 {
  rclcpp::init(argc,argv);
 
-  if(argc==1){
-    RCLCPP_INFO(rclcpp::get_logger("rclcpp"),"we need drain rate ");
-    return 1;
-  }
-  std::shared_ptr<rclcpp::Node>node =rclcpp::Node::make_shared("battery_efficiency_client");
+ std::shared_ptr<rclcpp::Node>node =rclcpp::Node::make_shared("battery_efficiency_client");
   rclcpp::Client<my_robot_nodes::srv::BatteryEfficiency>::SharedPtr client=
   node->create_client<my_robot_node::srv::BatteryEfficiency>("battery_efficiency");
 
