@@ -12,7 +12,7 @@ class Battery_level:public rclcpp::Node
 {
 public:
   Battery_level():Node("Battery_level"),count(0){
-    publisher_=this->create_publisher<std_msgs::msg::Float64>("battreylevel",10);
+    publisher_=this->create_publisher<std_msgs::msg::Float64>("batterylevel",10);
     auto timer_callback=
          [this]()->void{
            auto number = std_msgs::msg::Float64();
