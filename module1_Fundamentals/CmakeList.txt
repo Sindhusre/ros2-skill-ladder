@@ -1,0 +1,76 @@
+cmake_minimum_required(VERSION 3.8)
+project(my_robot_nodes)
+
+if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
+
+find_package(ament_cmake REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+find_package(rclcpp_lifecycle REQUIRED)
+
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "srv/BatteryEfficiency.srv"
+  DEPENDENCIES std_msgs
+)
+
+ament_export_dependencies(rosidl_default_runtime)
+
+rosidl_get_typesupport_target(
+  cpp_typesupport_target
+  ${PROJECT_NAME}
+  "rosidl_typesupport_cpp")
+
+add_executable(battery_publisher
+  src/battery_publisher.cpp)
+ament_target_dependencies(battery_publisher
+  rclcpp std_msgs)
+
+add_executable(battery_subscriber
+  src/battery_subscriber.cpp)
+ament_target_dependencies(battery_subscriber
+  rclcpp std_msgs)
+
+add_executable(battery_service
+  src/battery_service.cpp)
+ament_target_dependencies(battery_service
+  rclcpp std_msgs)
+target_link_libraries(battery_service
+  "${cpp_typesupport_target}")
+add_dependencies(battery_service
+  ${PROJECT_NAME})
+
+add_executable(battery_client
+  src/battery_client.cpp)
+ament_target_dependencies(battery_client
+  rclcpp std_msgs)
+target_link_libraries(battery_client
+  "${cpp_typesupport_target}")
+add_dependencies(battery_client
+  ${PROJECT_NAME})
+
+add_executable(battery_lifecycle
+  src/battery_lifecycle.cpp)
+ament_target_dependencies(battery_lifecycle
+  rclcpp
+  rclcpp_lifecycle
+  std_msgs)
+
+install(TARGETS
+  battery_publisher
+  battery_subscriber
+  battery_service
+  battery_client
+  battery_lifecycle
+  DESTINATION lib/${PROJECT_NAME})
+
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  set(ament_cmake_copyright_FOUND TRUE)
+  set(ament_cmake_cpplint_FOUND TRUE)
+  ament_lint_auto_find_test_dependencies()
+endif()
+
+ament_package()
