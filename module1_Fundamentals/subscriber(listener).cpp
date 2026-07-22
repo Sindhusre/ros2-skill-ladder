@@ -24,7 +24,7 @@ public:
          }
        };
      subscription_=
-       this->create_subscription<std_msgs::msg::Float64>("battery_level",10,topic_callback);
+       this->create_subscription<std_msgs::msg::Float64>("batterylevel",10,topic_callback);
   }
  private:
        rclcpp::Subscription<std_msgs::msg::Float64>::SharedPtr subscription_;
